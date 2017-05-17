@@ -11,6 +11,8 @@ namespace Assets.Scripts
 		public float fallMultiplier = 2.5f;
 		public float lowJumpMultiplier = 2f;
 
+		public Camera MainCamera;
+
 		Rigidbody2D rigidbody;
 
 		void Awake()
@@ -32,6 +34,26 @@ namespace Assets.Scripts
 			HandlingMovement();
 
 		}
+
+		void OnTriggerEnter2D(Collider2D col)
+		{
+			if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_TAG) 
+			{
+				Debug.Log("Entering color changer.");
+
+
+				if (MainCamera != null)
+				{
+					MainCamera.backgroundColor = Color.blue;
+				}
+				else
+				{
+					Debug.Log("Cam is null.");
+				}
+			}
+		}
+
+		#region Movement and Jumping
 
 		void HandlingJump()
 		{
@@ -61,5 +83,7 @@ namespace Assets.Scripts
 
 			rigidbody.velocity = new Vector2(horizontal * moveSpeed, rigidbody.velocity.y);
 		}
+
+		#endregion
 	}
 }
