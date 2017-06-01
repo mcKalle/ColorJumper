@@ -2,32 +2,32 @@
 
 namespace Assets.Scripts
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour
-    {
+	[RequireComponent(typeof(Rigidbody2D))]
+	public class PlayerController : MonoBehaviour
+	{
 
-        public float moveSpeed = 6;
+		public float moveSpeed = 6;
 
-        public float jumpHeight = 4;
+		public float jumpHeight = 4;
 
-        public float timeToJumpApex = 0.4f;
+		public float timeToJumpApex = 0.4f;
 
-        float accelerationTimeAirBorne = 0.2f;
-        float accelerationTimeAirGrounded = 0.1f;
+		float accelerationTimeAirBorne = 0.2f;
+		float accelerationTimeAirGrounded = 0.1f;
 
-        float jumpVelocity;
-        float gravity;
+		float jumpVelocity;
+		float gravity;
 
-        float velocityXSmoothing;
+		float velocityXSmoothing;
 
-        Vector3 velocity;
-        bool collidingAbove, collidingBelow, collidingRight, collidingLeft;
+		Vector3 velocity;
+		bool collidingAbove, collidingBelow, collidingRight, collidingLeft;
 
-        BoxCollider2D boxCollider;
+		BoxCollider2D boxCollider;
 
-        #region equations
+		#region equations
 
-        /*
+		/*
                         2 * jumpHeight
             gravity = -------------------
                         timeToJumpApex²
@@ -35,111 +35,106 @@ namespace Assets.Scripts
             jumpVelocity = gravity * timeToJumpApex;
         */
 
-        #endregion
+		#endregion
 
-        // Use this for initialization
-        void Start()
-        {
-            gravity = (2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-            jumpVelocity = gravity * timeToJumpApex;
+		// Use this for initialization
+		void Start()
+		{
+			gravity = (2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+			jumpVelocity = gravity * timeToJumpApex;
 
-            // use negativ because gravity is a downwards acceleration
-            Physics2D.gravity = new Vector2(0, -gravity);
+			// use negativ because gravity is a downwards acceleration
+			Physics2D.gravity = new Vector2(0, -gravity);
 
-            boxCollider = GetComponent<BoxCollider2D>();
-        }
+			collidingBelow = collidingAbove = collidingLeft = collidingRight = false;
+		}
 
-        void Update()
-        {
-            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		void FixedUpdate()
+		{
+			if (collidingAbove || collidingBelow)
+			{
+				velocity.y = 0;
+			}
 
-            if (Input.GetKeyDown(KeyCode.Space) && collidingBelow)
-            {
-                velocity.y = jumpVelocity;
-            }
+			if (collidingLeft || collidingRight)
+			{
+				velocity.x = 0;
+			}
 
-            float targetVelocityX = input.x * moveSpeed;
+			Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // TODO: change time for smoothing based on info if in air or not
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeAirGrounded);
+			if (Input.GetKeyDown(KeyCode.Space) && collidingBelow)
+			{
+				velocity.y += jumpVelocity;
+			}
 
-            Move();
-        }
+			float targetVelocityX = input.x * moveSpeed;
 
+			// TODO: change time for smoothing based on info if in air or not
+			velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeAirGrounded);
 
-        void Move()
-        {
-            transform.Translate(velocity * Time.deltaTime);
-        }
+			Move();
+		}
 
-        void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
-            {
-               // var relativePosition = transform.InverseTransformPoint(collision.transform.position);
+		void Move()
+		{
+			transform.Translate(velocity * Time.deltaTime);
+		}
 
-                collidingBelow = collidingAbove = collidingLeft = collidingRight = false;
+		void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
+			{
+				switch (collision.otherCollider.gameObject.tag)
+				{
+					case ColorJumperConstants.COLLISION_TOP:
+						collidingAbove = true;
+						break;
+					case ColorJumperConstants.COLLISION_BOTTOM:
+						collidingBelow = true;
+						break;
+					case ColorJumperConstants.COLLISION_LEFT:
+						collidingLeft = true;
+						break;
+					case ColorJumperConstants.COLLISION_RIGHT:
+						collidingRight = true;
+						break;
+				}
+			}
+		}
 
-                //if (relativePosition.x > 0)
-                //{
-                //    collidingRight = true;
-                //}
-                //else
-                //{
-                //    collidingLeft = true;
-                //}
-                //if (relativePosition.y > 0)
-                //{
-                //    collidingAbove = true;
-                //}
-                //else
-                //{
-                //    collidingBelow = true;
-                //}
+		void OnCollisionExit2D(Collision2D collision)
+		{
+			if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
+			{
+				switch (collision.otherCollider.gameObject.tag)
+				{
+					case ColorJumperConstants.COLLISION_TOP:
+						collidingAbove = false;
+						break;
+					case ColorJumperConstants.COLLISION_BOTTOM:
+						collidingBelow = false;
+						break;
+					case ColorJumperConstants.COLLISION_LEFT:
+						collidingLeft = false;
+						break;
+					case ColorJumperConstants.COLLISION_RIGHT:
+						collidingRight = false;
+						break;
+				}
+			}
+		}
 
-                //Debug.Log(string.Format("left: {0}, right: {1}, top: {2}, bottom: {3}", collidingLeft, collidingRight, collidingAbove, collidingBelow));
-            }
-        }
-
-        void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
-            {
-                //var relativePosition = transform.InverseTransformPoint(collision.transform.position);
-
-                collidingBelow = collidingAbove = collidingLeft = collidingRight = false;
-
-                //if (relativePosition.x > 0)
-                //{
-                //    collidingRight = false;
-                //}
-                //else
-                //{
-                //    collidingLeft = false;
-                //}
-                //if (relativePosition.y > 0)
-                //{
-                //    collidingAbove = false;
-                //}
-                //else
-                //{
-                //    collidingBelow = false;
-                //}
-
-               // Debug.Log(string.Format("left: {0}, right: {1}, top: {2}, bottom: {3}", collidingLeft, collidingRight, collidingAbove, collidingBelow));
-            }
-        }
-
-            void OnTriggerEnter2D(Collider2D col)
-        {
-            if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
-            {
-                GameMaster.Instance.ChangeColor(ColorEnum.Yellow);
-            }
-            else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
-            {
-                GameMaster.Instance.ChangeColor(ColorEnum.Blue);
-            }
-        }
-    }
+		void OnTriggerEnter2D(Collider2D col)
+		{
+			if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
+			{
+				GameMaster.Instance.ChangeColor(ColorEnum.Yellow);
+			}
+			else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
+			{
+				GameMaster.Instance.ChangeColor(ColorEnum.Blue);
+			}
+		}
+	}
 }
