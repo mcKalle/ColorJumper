@@ -2,32 +2,12 @@
 
 namespace Assets.Scripts
 {
-	[RequireComponent(typeof(Rigidbody2D))]
-	public class PlayerController : MonoBehaviour
+    [RequireComponent(typeof(Controller2D))]
+    public class PlayerController : MonoBehaviour
 	{
+        #region equations
 
-		public float moveSpeed = 6;
-
-		public float jumpHeight = 4;
-
-		public float timeToJumpApex = 0.4f;
-
-		float accelerationTimeAirBorne = 0.2f;
-		float accelerationTimeAirGrounded = 0.1f;
-
-		float jumpVelocity;
-		float gravity;
-
-		float velocityXSmoothing;
-
-		Vector3 velocity;
-		bool collidingAbove, collidingBelow, collidingRight, collidingLeft;
-
-		BoxCollider2D boxCollider;
-
-		#region equations
-
-		/*
+        /*
                         2 * jumpHeight
             gravity = -------------------
                         timeToJumpApex²
@@ -35,97 +15,65 @@ namespace Assets.Scripts
             jumpVelocity = gravity * timeToJumpApex;
         */
 
-		#endregion
+        #endregion
 
-		// Use this for initialization
-		void Start()
-		{
-			gravity = (2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-			jumpVelocity = gravity * timeToJumpApex;
+        public float maxJumpHeight = 4;
+        public float minJumpHeight = 1;
+        public float timeToJumpApex = .4f;
+        float accelerationTimeAirborne = .2f;
+        float accelerationTimeGrounded = .1f;
+        float moveSpeed = 6;
 
-			// use negativ because gravity is a downwards acceleration
-			Physics2D.gravity = new Vector2(0, -gravity);
+        float gravity;
+        Vector3 velocity;
+        float velocityXSmoothing;
 
-			collidingBelow = collidingAbove = collidingLeft = collidingRight = false;
-		}
+        float maxJumpVelocity;
+        float minJumpVelocity;
 
-		void FixedUpdate()
-		{
-			if (collidingAbove || collidingBelow)
-			{
-				velocity.y = 0;
-			}
 
-			if (collidingLeft || collidingRight)
-			{
-				velocity.x = 0;
-			}
+        Controller2D controller;
 
-			Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        void Start()
+        {
+            controller = GetComponent<Controller2D>();
 
-			if (Input.GetKeyDown(KeyCode.Space) && collidingBelow)
-			{
-				velocity.y += jumpVelocity;
-			}
+            gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+            maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+            minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        }
 
-			float targetVelocityX = input.x * moveSpeed;
+        void Update()
+        {
 
-			// TODO: change time for smoothing based on info if in air or not
-			velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeAirGrounded);
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-			Move();
-		}
+            if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+            {
+                velocity.y = maxJumpVelocity;
+            }
 
-		void Move()
-		{
-			transform.Translate(velocity * Time.deltaTime);
-		}
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                if (velocity.y > minJumpVelocity)
+                {
+                    velocity.y = minJumpVelocity;
+                }
+            }
 
-		void OnCollisionEnter2D(Collision2D collision)
-		{
-			if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
-			{
-				switch (collision.otherCollider.gameObject.tag)
-				{
-					case ColorJumperConstants.COLLISION_TOP:
-						collidingAbove = true;
-						break;
-					case ColorJumperConstants.COLLISION_BOTTOM:
-						collidingBelow = true;
-						break;
-					case ColorJumperConstants.COLLISION_LEFT:
-						collidingLeft = true;
-						break;
-					case ColorJumperConstants.COLLISION_RIGHT:
-						collidingRight = true;
-						break;
-				}
-			}
-		}
+            float targetVelocityX = input.x * moveSpeed;
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime, input);
 
-		void OnCollisionExit2D(Collision2D collision)
-		{
-			if (collision.gameObject.tag == ColorJumperConstants.OBSTACLE)
-			{
-				switch (collision.otherCollider.gameObject.tag)
-				{
-					case ColorJumperConstants.COLLISION_TOP:
-						collidingAbove = false;
-						break;
-					case ColorJumperConstants.COLLISION_BOTTOM:
-						collidingBelow = false;
-						break;
-					case ColorJumperConstants.COLLISION_LEFT:
-						collidingLeft = false;
-						break;
-					case ColorJumperConstants.COLLISION_RIGHT:
-						collidingRight = false;
-						break;
-				}
-			}
-		}
 
-		void OnTriggerEnter2D(Collider2D col)
+            if (controller.collisions.above || controller.collisions.below)
+            {
+                velocity.y = 0;
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D col)
 		{
 			if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
 			{

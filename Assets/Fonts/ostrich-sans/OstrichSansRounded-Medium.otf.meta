@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4742b484e2707f5468dffba3784ec74a
+timeCreated: 1496593463
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ostrich Sans Rounded
+  fontNames:
+  - Ostrich Sans Rounded
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
