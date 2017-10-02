@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     [RequireComponent(typeof(Controller2D))]
     public class PlayerController : MonoBehaviour
-	{
+    {
         #region equations
 
         /*
@@ -31,6 +31,7 @@ namespace Assets.Scripts
         float maxJumpVelocity;
         float minJumpVelocity;
 
+        int jumpCount = 0;
 
         Controller2D controller;
 
@@ -48,9 +49,21 @@ namespace Assets.Scripts
 
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+            if (jumpCount == 0)
             {
-                velocity.y = maxJumpVelocity;
+                if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
+                {
+                    velocity.y = maxJumpVelocity;
+                    jumpCount++;
+                }
+            }
+            else if (jumpCount == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    velocity.y = maxJumpVelocity;
+                    jumpCount++;
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
@@ -70,19 +83,20 @@ namespace Assets.Scripts
             if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;
+                jumpCount = 0;
             }
         }
 
         void OnTriggerEnter2D(Collider2D col)
-		{
-			if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
-			{
-				GameMaster.Instance.ChangeColor(ColorEnum.Yellow);
-			}
-			else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
-			{
-				GameMaster.Instance.ChangeColor(ColorEnum.Blue);
-			}
-		}
-	}
+        {
+            if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
+            {
+                GameMaster.Instance.ChangeColor(ColorEnum.Yellow);
+            }
+            else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
+            {
+                GameMaster.Instance.ChangeColor(ColorEnum.Blue);
+            }
+        }
+    }
 }
