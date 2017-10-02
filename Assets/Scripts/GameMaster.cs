@@ -11,21 +11,25 @@ public class GameMaster : MonoBehaviour
     public static GameMaster Instance;
 
     [Header("Background Colors")]
-    public Color YellowBackground;
-    public Color BlueBackground;
+    public Color Color1;
+    public Color Color2;
 
     [Header("Obstacle Containers")]
-    public GameObject YellowObstacles;
-    public GameObject BlueObstacles;
+    public GameObject Color1Obstacles;
+    public GameObject Color2Obstacles;
 
     [Header("Player Materials")]
-    public Material YellowMaterial;
-    public Material BlueMaterial;
+    public Material Color1Material;
+    public Material Color2Material;
+
+    [Header("Label Colors")]
+    public Color LabelColor1;
+    public Color LabelColor2;
 
     GameObject player;
     Renderer playerRenderer;
 
-    static bool IsYellow = true;
+    static bool isColor1 = true;
     int changeCount;
 
     // Use this for initialization
@@ -34,7 +38,7 @@ public class GameMaster : MonoBehaviour
 
         Instance = this;
 
-        MainCamera.backgroundColor = YellowBackground;
+        MainCamera.backgroundColor = Color1;
 
         changeCount = 0;
 
@@ -45,21 +49,23 @@ public class GameMaster : MonoBehaviour
 
     #region ColorChanging
 
-    public void ChangeColor(ColorEnum color)
+    public void ChangeColor(int colorMode)
     {
-        switch (color)
+        switch (colorMode)
         {
-            case ColorEnum.Blue:
-                MainCamera.backgroundColor = BlueBackground;
-                playerRenderer.material = BlueMaterial;
-                YellowObstacles.SetActive(false);
-                BlueObstacles.SetActive(true);
+            case 1:
+                MainCamera.backgroundColor = Color2;
+                playerRenderer.material = Color2Material;
+                Color1Obstacles.SetActive(false);
+                Color2Obstacles.SetActive(true);
+                UIManager.Instance.ApplyColorChange(LabelColor1);
                 break;
-            case ColorEnum.Yellow:
-                MainCamera.backgroundColor = YellowBackground;
-                playerRenderer.material = YellowMaterial;
-                YellowObstacles.SetActive(true);
-                BlueObstacles.SetActive(false);
+            case 2:
+                MainCamera.backgroundColor = Color1;
+                playerRenderer.material = Color1Material;
+                Color1Obstacles.SetActive(true);
+                Color2Obstacles.SetActive(false);
+                UIManager.Instance.ApplyColorChange(LabelColor2);
                 break;
             default:
                 break;
@@ -68,7 +74,6 @@ public class GameMaster : MonoBehaviour
         changeCount++;
 
         // UI handling
-        UIManager.Instance.ApplyColorChange(color);
         UIManager.Instance.UpdateChangeCount(changeCount);
 
     }

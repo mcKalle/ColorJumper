@@ -37,33 +37,17 @@ public class UIManager : MonoBehaviour
         UpdateChangeCount(0);
     }
 
-    public void ApplyColorChange(ColorEnum color)
+    public void ApplyColorChange(Color color)
     {
-        switch (color)
-        {
-            case ColorEnum.Blue:
-                ChangeLabels(ColorJumperConstants.COLOR_BLUE_5);
-                ColorChangeCountImage.sprite = ColorChangesBlue;
-                break;
-            case ColorEnum.Yellow:
-                ChangeLabels(ColorJumperConstants.COLOR_YELLOW_5);
-                ColorChangeCountImage.sprite = ColorChangesYellow;
-                break;
-            default:
-                break;
-        }
+        ChangeLabels(color);
     }
 
-    void ChangeLabels(string colorCode)
+    void ChangeLabels(Color color)
     {
-        Color c;
-
-        if (ColorUtility.TryParseHtmlString(colorCode, out c))
+        foreach (Text coloredLabel in coloredLabels)
         {
-            foreach (Text coloredLabel in coloredLabels)
-            {
-                coloredLabel.color = c;
-            }
+            coloredLabel.color = color;
+            coloredLabel.gameObject.SetActive(true);
         }
     }
 

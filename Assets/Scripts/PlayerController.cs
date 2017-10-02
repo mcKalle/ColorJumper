@@ -91,11 +91,11 @@ namespace Assets.Scripts
         {
             if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
             {
-                GameMaster.Instance.ChangeColor(ColorEnum.Yellow);
+                GameMaster.Instance.ChangeColor(2);
             }
             else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
             {
-                GameMaster.Instance.ChangeColor(ColorEnum.Blue);
+                GameMaster.Instance.ChangeColor(1);
             }
         }
     }
