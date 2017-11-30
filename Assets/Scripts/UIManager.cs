@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour
 
     public Text ChangeCountLabel;
 
-    List<GameObject> coloredLabelsGameObjects;
-    List<Text> coloredLabels;
+    List<GameObject> _coloredLabelsGameObjects;
+    List<Text> _coloredLabels;
 
     [Header("Color Change Count Image")]
     public Sprite ColorChangesYellow;
@@ -25,13 +25,13 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
 
-        coloredLabels = new List<Text>();
+        _coloredLabels = new List<Text>();
 
-        coloredLabelsGameObjects = GameObject.FindGameObjectsWithTag(ColorJumperConstants.COLORED_LABEL).ToList();
+        _coloredLabelsGameObjects = GameObject.FindGameObjectsWithTag(ColorJumperConstants.COLORED_LABEL).ToList();
 
-        foreach (GameObject go in coloredLabelsGameObjects)
+        foreach (GameObject go in _coloredLabelsGameObjects)
         {
-            coloredLabels.Add(go.GetComponent("Text") as Text);
+            _coloredLabels.Add(go.GetComponent("Text") as Text);
         }
 
         UpdateChangeCount(0);
@@ -44,11 +44,17 @@ public class UIManager : MonoBehaviour
 
     void ChangeLabels(Color color)
     {
-        foreach (Text coloredLabel in coloredLabels)
-        {
-            coloredLabel.color = color;
-            coloredLabel.gameObject.SetActive(true);
-        }
+        //float r = color.r, g = color.g, b = color.b, a = color.a;
+
+        //// switch colors for labels
+        //foreach (Text coloredLabel in _coloredLabels)
+        //{
+        //    coloredLabel.color= new Color(r, g, b, a);
+        //    coloredLabel.gameObject.SetActive(true);
+        //}
+
+        // rotate count icon
+        ColorChangeCountImage.transform.Rotate(new Vector3(0,180,0));
     }
 
     public void UpdateChangeCount(int count)

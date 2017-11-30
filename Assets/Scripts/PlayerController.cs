@@ -97,6 +97,10 @@ namespace Assets.Scripts
             {
                 GameMaster.Instance.ChangeColor(1);
             }
+            else if (col.gameObject.tag == ColorJumperConstants.DEATH_TRIGGER)
+            {
+                GameMaster.Instance.ApplyPlayerDeath();
+            }
         }
     }
 }

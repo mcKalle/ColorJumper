@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
@@ -46,6 +47,15 @@ public class GameMaster : MonoBehaviour
         playerRenderer = player.GetComponent<Renderer>();
     }
 
+    public void ApplyPlayerDeath()
+    {
+        MainCamera.backgroundColor = Color.red;
+    }
+
+    private void Respawn()
+    {
+        MainCamera.backgroundColor = Color1;
+    }
 
     #region ColorChanging
 
@@ -58,15 +68,15 @@ public class GameMaster : MonoBehaviour
                 playerRenderer.material = Color2Material;
                 Color1Obstacles.SetActive(false);
                 Color2Obstacles.SetActive(true);
-                UIManager.Instance.ApplyColorChange(LabelColor1);
+                UIManager.Instance.ApplyColorChange(LabelColor2);
                 break;
             case 2:
                 MainCamera.backgroundColor = Color1;
                 playerRenderer.material = Color1Material;
                 Color1Obstacles.SetActive(true);
                 Color2Obstacles.SetActive(false);
-                UIManager.Instance.ApplyColorChange(LabelColor2);
-                break;
+                UIManager.Instance.ApplyColorChange(LabelColor1);
+                break; 
             default:
                 break;
         }
