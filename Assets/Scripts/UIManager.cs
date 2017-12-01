@@ -37,12 +37,12 @@ public class UIManager : MonoBehaviour
         UpdateChangeCount(0);
     }
 
-    public void ApplyColorChange(Color color)
+    public void ApplyColorChange(Color color, int colorMode)
     {
-        ChangeLabels(color);
+        ChangeLabels(color, colorMode);
     }
 
-    void ChangeLabels(Color color)
+    void ChangeLabels(Color color, int colorMode)
     {
         //float r = color.r, g = color.g, b = color.b, a = color.a;
 
@@ -53,8 +53,9 @@ public class UIManager : MonoBehaviour
         //    coloredLabel.gameObject.SetActive(true);
         //}
 
-        // rotate count icon
-        ColorChangeCountImage.transform.Rotate(new Vector3(0,180,0));
+        // set the roation depending on the colorMode (1=dark color, 2=light color) 
+        // --> therefore the Y roation is either 0 or 180
+        ColorChangeCountImage.transform.localEulerAngles = new Vector3(0, colorMode == 2 ? 0 : 180, 0);
     }
 
     public void UpdateChangeCount(int count)

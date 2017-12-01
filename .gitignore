@@ -29,3 +29,10 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.exe
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/ProjectSettings.json
+.vs/ColorJumper/v15/Server/sqlite3/storage.ide
+.vs/ColorJumper/v15/Server/sqlite3/db.lock
+*.ide-wal
+*.ide-shm

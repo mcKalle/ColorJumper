@@ -27,6 +27,10 @@ public class GameMaster : MonoBehaviour
     public Color LabelColor1;
     public Color LabelColor2;
 
+    [Header("Start Point")]
+    public Transform LevelEntryPoint;
+
+
     GameObject player;
     Renderer playerRenderer;
 
@@ -36,25 +40,37 @@ public class GameMaster : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         Instance = this;
-
-        MainCamera.backgroundColor = Color1;
 
         changeCount = 0;
 
         player = GameObject.FindGameObjectWithTag(ColorJumperConstants.PLAYER);
         playerRenderer = player.GetComponent<Renderer>();
+
+        Respawn();
     }
 
     public void ApplyPlayerDeath()
     {
-        MainCamera.backgroundColor = Color.red;
+        MainCamera.backgroundColor = Color.black;
+
+        playerRenderer.enabled = false;
+       
+        Respawn();
     }
 
     private void Respawn()
     {
-        MainCamera.backgroundColor = Color1;
+        player.transform.position = LevelEntryPoint.position;
+
+        ChangeColor(2);
+        changeCount = 0;
+        UIManager.Instance.UpdateChangeCount(changeCount);
+
+        playerRenderer.enabled = true;
+        // MainCamera.transform.SetPositionAndRotation(new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y + 200), MainCamera.transform.rotation);
+
+        player.GetComponent<BoxCollider2D>().transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 5), player.transform.rotation);
     }
 
     #region ColorChanging
@@ -68,14 +84,14 @@ public class GameMaster : MonoBehaviour
                 playerRenderer.material = Color2Material;
                 Color1Obstacles.SetActive(false);
                 Color2Obstacles.SetActive(true);
-                UIManager.Instance.ApplyColorChange(LabelColor2);
+                UIManager.Instance.ApplyColorChange(LabelColor2, colorMode);
                 break;
             case 2:
                 MainCamera.backgroundColor = Color1;
                 playerRenderer.material = Color1Material;
                 Color1Obstacles.SetActive(true);
                 Color2Obstacles.SetActive(false);
-                UIManager.Instance.ApplyColorChange(LabelColor1);
+                UIManager.Instance.ApplyColorChange(LabelColor1, colorMode);
                 break; 
             default:
                 break;
