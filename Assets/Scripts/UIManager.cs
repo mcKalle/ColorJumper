@@ -12,13 +12,15 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public Text ChangeCountLabel;
+    Text _levelLabel;
 
     List<GameObject> _coloredLabelsGameObjects;
     List<Text> _coloredLabels;
 
+
+
     [Header("Color Change Count Image")]
-    public Sprite ColorChangesYellow;
-    public Sprite ColorChangesBlue;
+    public Sprite ColorChanges;
     public Image ColorChangeCountImage;
 
     void Start()
@@ -28,6 +30,10 @@ public class UIManager : MonoBehaviour
         _coloredLabels = new List<Text>();
 
         _coloredLabelsGameObjects = GameObject.FindGameObjectsWithTag(ColorJumperConstants.COLORED_LABEL).ToList();
+        GameObject labelGameObject = GameObject.FindGameObjectsWithTag(ColorJumperConstants.LEVEL_LABEL).First();
+        _levelLabel = labelGameObject.GetComponent<Text>();
+
+        _levelLabel.text = SceneManager.GetActiveScene().name;
 
         foreach (GameObject go in _coloredLabelsGameObjects)
         {

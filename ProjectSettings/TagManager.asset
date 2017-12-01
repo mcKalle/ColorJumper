@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ColorChangerBlue
-  - ColorChangerYellow
   - DeathTrigger
   - Obstacle
   - CollisionRight
@@ -13,6 +11,11 @@ TagManager:
   - CollisionTop
   - CollisionBottom
   - ColoredLabel
+  - ColorChangerLight
+  - ColorChangerDark
+  - ColorChangerYellow
+  - ColorChangerBlue
+  - LevelLabel
   layers:
   - Default
   - TransparentFX

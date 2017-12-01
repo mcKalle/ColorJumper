@@ -5,20 +5,24 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-	public static class ColorJumperConstants
-	{
-		public const string COLOR_CHANGER_BLUE = "ColorChangerBlue";
-        public const string COLOR_CHANGER_YELLOW = "ColorChangerYellow";
+    public static class ColorJumperConstants
+    {
+        public const string COLOR_CHANGER_DARK = "ColorChangerDark";
+        public const string COLOR_CHANGER_LIGHT = "ColorChangerLight";
 
         public const string DEATH_TRIGGER = "DeathTrigger";
 
         public const string RESPAWN = "Respawn";
 
+        public const string FINISH = "Finish";
+
         public const string PLAYER = "Player";
 
         public const string OBSTACLE = "Obstacle";
 
+        // UI
         public const string COLORED_LABEL = "ColoredLabel";
+        public const string LEVEL_LABEL = "LevelLabel";
 
         public const string COLOR_YELLOW_1 = "#FFFAD4";
         public const string COLOR_YELLOW_2 = "#FFF6B0";

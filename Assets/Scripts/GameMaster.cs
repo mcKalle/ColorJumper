@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class GameMaster : MonoBehaviour
         Respawn();
     }
 
+    #region SpawnDeathFinish
+
     public void ApplyPlayerDeath()
     {
         MainCamera.backgroundColor = Color.black;
@@ -65,13 +68,25 @@ public class GameMaster : MonoBehaviour
 
         ChangeColor(2);
         changeCount = 0;
-        UIManager.Instance.UpdateChangeCount(changeCount);
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.UpdateChangeCount(changeCount);
+        }
 
         playerRenderer.enabled = true;
         // MainCamera.transform.SetPositionAndRotation(new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y + 200), MainCamera.transform.rotation);
 
         player.GetComponent<BoxCollider2D>().transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 5), player.transform.rotation);
     }
+
+    public void Finish()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(currentScene + 1);
+    }
+
+    #endregion
 
     #region ColorChanging
 
@@ -84,14 +99,20 @@ public class GameMaster : MonoBehaviour
                 playerRenderer.material = Color2Material;
                 Color1Obstacles.SetActive(false);
                 Color2Obstacles.SetActive(true);
-                UIManager.Instance.ApplyColorChange(LabelColor2, colorMode);
+                if (UIManager.Instance != null)
+                {
+                    UIManager.Instance.ApplyColorChange(LabelColor2, colorMode);
+                }
                 break;
             case 2:
                 MainCamera.backgroundColor = Color1;
                 playerRenderer.material = Color1Material;
                 Color1Obstacles.SetActive(true);
                 Color2Obstacles.SetActive(false);
-                UIManager.Instance.ApplyColorChange(LabelColor1, colorMode);
+                if (UIManager.Instance != null)
+                {
+                    UIManager.Instance.ApplyColorChange(LabelColor1, colorMode);
+                }
                 break; 
             default:
                 break;
@@ -100,7 +121,10 @@ public class GameMaster : MonoBehaviour
         changeCount++;
 
         // UI handling
-        UIManager.Instance.UpdateChangeCount(changeCount);
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.UpdateChangeCount(changeCount);
+        }
 
     }
 

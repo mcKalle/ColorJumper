@@ -17,12 +17,17 @@ namespace Assets.Scripts
 
         #endregion
 
+        [Header ("Jumping")]
         public float maxJumpHeight = 4;
         public float minJumpHeight = 1;
         public float timeToJumpApex = .4f;
+
+        [Header("Moving")]
+        public float moveSpeed = 6;
+
         float accelerationTimeAirborne = .2f;
         float accelerationTimeGrounded = .1f;
-        float moveSpeed = 6;
+        
 
         float gravity;
         Vector3 velocity;
@@ -89,17 +94,21 @@ namespace Assets.Scripts
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_YELLOW)
+            if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_LIGHT)
             {
                 GameMaster.Instance.ChangeColor(2);
             }
-            else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_BLUE)
+            else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_DARK)
             {
                 GameMaster.Instance.ChangeColor(1);
             }
             else if (col.gameObject.tag == ColorJumperConstants.DEATH_TRIGGER)
             {
                 GameMaster.Instance.ApplyPlayerDeath();
+            }
+            else if (col.gameObject.tag == ColorJumperConstants.FINISH)
+            {
+                GameMaster.Instance.Finish();
             }
         }
     }

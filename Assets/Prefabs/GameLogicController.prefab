@@ -52,9 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 0}
-  YellowBackground: {r: 1, g: 0.9803922, b: 0.82745105, a: 0}
-  BlueBackground: {r: 0.70980394, g: 0.8431373, b: 0.854902, a: 0}
-  YellowObstacles: {fileID: 0}
-  BlueObstacles: {fileID: 0}
-  YellowMaterial: {fileID: 2100000, guid: 013d18b061597604684ce8941febb733, type: 2}
-  BlueMaterial: {fileID: 2100000, guid: 8063dfcfd1e6fd7489674608e93ff80f, type: 2}
+  Color1: {r: 1, g: 0.9803922, b: 0.82745105, a: 0}
+  Color2: {r: 0.70980394, g: 0.8431373, b: 0.854902, a: 0}
+  Color1Obstacles: {fileID: 0}
+  Color2Obstacles: {fileID: 0}
+  Color1Material: {fileID: 2100000, guid: 013d18b061597604684ce8941febb733, type: 2}
+  Color2Material: {fileID: 2100000, guid: 8063dfcfd1e6fd7489674608e93ff80f, type: 2}
+  LabelColor1: {r: 0.64705884, g: 0.5921569, b: 0.17254902, a: 0}
+  LabelColor2: {r: 0.10588236, g: 0.37647063, b: 0.39607847, a: 0}
+  LevelEntryPoint: {fileID: 0}
