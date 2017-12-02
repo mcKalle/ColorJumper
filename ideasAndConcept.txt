@@ -1,0 +1,33 @@
+﻿== Color Jumper ==
+
+
+
+moving platforms
+
+moving color changers
+
+short time change 
+(color changes back after x seconds (seen by color inside of color changer)
+
+Sounds
+color changing
+jumps
+death
+finish
+
+Music
+menu music
+level music
+
+Menu:
+Play
+Enable levels once completed
+
+Scores
+highscore (how many deaths and color changes)
+
+Options
+choose color design:
+6 different colors themes
+every one includes a dark and a light 	color 
+Volume for music and sounds
