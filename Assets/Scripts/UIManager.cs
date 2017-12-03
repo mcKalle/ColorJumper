@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +12,8 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
-    public Text ChangeCountLabel;
-    Text _levelLabel;
+    public TextMeshProUGUI ChangeCountLabel;
+    TextMeshProUGUI _levelLabel;
 
     List<GameObject> _coloredLabelsGameObjects;
     List<Text> _coloredLabels;
@@ -31,10 +32,10 @@ public class UIManager : MonoBehaviour
 
         _coloredLabelsGameObjects = GameObject.FindGameObjectsWithTag(ColorJumperConstants.COLORED_LABEL).ToList();
         GameObject labelGameObject = GameObject.FindGameObjectsWithTag(ColorJumperConstants.LEVEL_LABEL).First();
-        _levelLabel = labelGameObject.GetComponent<Text>();
+        _levelLabel = labelGameObject.GetComponent<TextMeshProUGUI>();
 
         _levelLabel.text = SceneManager.GetActiveScene().name;
-
+        
         foreach (GameObject go in _coloredLabelsGameObjects)
         {
             _coloredLabels.Add(go.GetComponent("Text") as Text);
@@ -61,7 +62,7 @@ public class UIManager : MonoBehaviour
 
         // set the roation depending on the colorMode (1=dark color, 2=light color) 
         // --> therefore the Y roation is either 0 or 180
-        ColorChangeCountImage.transform.localEulerAngles = new Vector3(0, colorMode == 2 ? 0 : 180, 0);
+        ColorChangeCountImage.transform.localEulerAngles = new Vector3(colorMode == 2 ? 0 : 180, 0, 0);
     }
 
     public void UpdateChangeCount(int count)
