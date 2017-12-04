@@ -75,7 +75,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void OpenLevel(int number)
     {
-        SceneManager.LoadScene("Level" + number);
+        SceneManager.LoadScene("Level " + number);
     }
 
     #endregion
