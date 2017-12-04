@@ -2,8 +2,6 @@
 
 
 
-moving platforms
-
 moving color changers
 
 short time change 

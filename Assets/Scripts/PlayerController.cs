@@ -17,7 +17,7 @@ namespace Assets.Scripts
 
         #endregion
 
-        [Header ("Jumping")]
+        [Header("Jumping")]
         public float maxJumpHeight = 4;
         public float minJumpHeight = 1;
         public float timeToJumpApex = .4f;
@@ -27,7 +27,7 @@ namespace Assets.Scripts
 
         float accelerationTimeAirborne = .2f;
         float accelerationTimeGrounded = .1f;
-        
+
 
         float gravity;
         Vector3 velocity;
@@ -84,10 +84,9 @@ namespace Assets.Scripts
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime, input);
 
-
             if (controller.collisions.above || controller.collisions.below)
             {
-                velocity.y = 0;
+                velocity.y = 0;           
                 jumpCount = 0;
             }
         }
@@ -109,6 +108,18 @@ namespace Assets.Scripts
             else if (col.gameObject.tag == ColorJumperConstants.FINISH)
             {
                 GameMaster.Instance.Finish();
+            }
+            else if (col.gameObject.tag == ColorJumperConstants.MOVING_PLATFORM)
+            {
+                transform.SetParent(col.transform);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D col)
+        {
+            if (col.gameObject.tag == ColorJumperConstants.MOVING_PLATFORM)
+            {
+                transform.SetParent(null);
             }
         }
     }

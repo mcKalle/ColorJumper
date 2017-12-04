@@ -16,6 +16,7 @@ TagManager:
   - ColorChangerYellow
   - ColorChangerBlue
   - LevelLabel
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Player
   - CollisionBox
   - Obstacle
-  - 
+  - Test
   - 
   - 
   - 

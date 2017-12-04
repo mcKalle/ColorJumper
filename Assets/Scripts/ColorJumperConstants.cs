@@ -20,6 +20,8 @@ namespace Assets.Scripts
 
         public const string OBSTACLE = "Obstacle";
 
+        public const string MOVING_PLATFORM = "MovingPlatform";
+
         // UI
         public const string COLORED_LABEL = "ColoredLabel";
         public const string LEVEL_LABEL = "LevelLabel";

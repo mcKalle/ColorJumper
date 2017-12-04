@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -81,9 +82,12 @@ public class GameMaster : MonoBehaviour
 
     public void Finish()
     {
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        string currentScene = SceneManager.GetActiveScene().name;
+        string lastChar = currentScene[currentScene.Length - 1].ToString();
 
-        SceneManager.LoadScene(currentScene + 1);
+        int level = Convert.ToInt32(lastChar);
+
+        SceneManager.LoadScene("Level " + (level + 1));
     }
 
     #endregion
