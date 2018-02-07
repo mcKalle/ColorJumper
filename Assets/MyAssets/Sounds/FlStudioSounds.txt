@@ -1,0 +1,13 @@
+Synth: 	Morphine
+
+(06) Synthetic 
+	10.	SYN Chordial FG
+	
+(08) Bass
+	1. 	BAS Acoustic 1 FG
+
+	
+Synth: Sakura
+
+9. Sonic Haiku Bank
+	148. SY Trance Pizz		

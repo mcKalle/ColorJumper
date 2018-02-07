@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public TextMeshProUGUI ChangeCountLabel;
+    public TextMeshProUGUI SplitPowerUpCountLabel;
     TextMeshProUGUI _levelLabel;
 
     List<GameObject> _coloredLabelsGameObjects;
@@ -68,6 +69,11 @@ public class UIManager : MonoBehaviour
     public void UpdateChangeCount(int count)
     {
         ChangeCountLabel.text = count.ToString();
+    }
+
+    public void UpdateSplitPowerUpCount(int count)
+    {
+        SplitPowerUpCountLabel.text = count.ToString();
     }
 
     public void ChangeScene(int sceneIndex)

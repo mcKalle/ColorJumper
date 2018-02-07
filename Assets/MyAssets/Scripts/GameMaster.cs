@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using Assets.MyAssets.Scripts.PowerUps;
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ public class GameMaster : MonoBehaviour
         MainCamera.backgroundColor = Color.black;
 
         playerRenderer.enabled = false;
-       
+
         Respawn();
     }
 
@@ -69,14 +70,15 @@ public class GameMaster : MonoBehaviour
 
         ChangeColor(2);
         changeCount = 0;
+        
         if (UIManager.Instance != null)
         {
             UIManager.Instance.UpdateChangeCount(changeCount);
+            UIManager.Instance.UpdateSplitPowerUpCount(0);
         }
 
         playerRenderer.enabled = true;
-        // MainCamera.transform.SetPositionAndRotation(new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y + 200), MainCamera.transform.rotation);
-
+        
         player.GetComponent<BoxCollider2D>().transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 5), player.transform.rotation);
     }
 
@@ -117,7 +119,7 @@ public class GameMaster : MonoBehaviour
                 {
                     UIManager.Instance.ApplyColorChange(LabelColor1, colorMode);
                 }
-                break; 
+                break;
             default:
                 break;
         }
@@ -130,6 +132,25 @@ public class GameMaster : MonoBehaviour
             UIManager.Instance.UpdateChangeCount(changeCount);
         }
 
+    }
+
+    #endregion
+
+    #region PowerUps
+
+    public void TakePowerUp(GameObject gameObject, IPowerUp powerUp)
+    {
+        if (powerUp is SplitPowerUp)
+        {
+            powerUp.Count++;
+
+            // do ui stuff
+            UIManager.Instance.UpdateSplitPowerUpCount(powerUp.Count);
+        }
+
+        // let it disappear
+        Destroy(gameObject, 0f);
+        // TODO: maybe with particles
     }
 
     #endregion

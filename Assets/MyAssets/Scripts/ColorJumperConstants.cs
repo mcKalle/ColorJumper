@@ -22,6 +22,8 @@ namespace Assets.Scripts
 
         public const string MOVING_PLATFORM = "MovingPlatform";
 
+        public const string SPLIT_POWER_UP = "SplitPowerUp";
+
         // UI
         public const string COLORED_LABEL = "ColoredLabel";
         public const string LEVEL_LABEL = "LevelLabel";
