@@ -1,4 +1,5 @@
-﻿using Assets.MyAssets.Scripts.PowerUps;
+﻿using Assets.MyAssets.Scripts;
+using Assets.MyAssets.Scripts.PowerUps;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -43,18 +44,23 @@ namespace Assets.Scripts
 
         float minJumpVelocity;
 
-
-        int jumpCount = 0;
+        [HideInInspector]
+        public int jumpCount = 0;
 
         // used for the animation of the split power up
         // the controls will be disabled, to just have the gravity
         bool controlsEnabled = true;
 
+
+        // used for tutorial
+        [HideInInspector]
+        public bool moveSidewaysAllowed = true;
+
         [HideInInspector]
         public Controller2D controller;
 
         [System.NonSerialized]
-        private SplitPowerUp splitPowerUp;
+        public SplitPowerUp splitPowerUp;
 
         public float ShrinkAmount = 0.8f;
 
@@ -112,8 +118,12 @@ namespace Assets.Scripts
                 }
             }
 
-            float targetVelocityX = input.x * moveSpeed;
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            if (moveSidewaysAllowed)
+            {
+                float targetVelocityX = input.x * moveSpeed;
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
+
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime, input);
 
@@ -175,20 +185,20 @@ namespace Assets.Scripts
         {
             if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_LIGHT)
             {
-                GameMaster.Instance.ChangeColor(2);
+                GameManager.Instance.ChangeColor(2);
             }
             else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_DARK)
             {
-                GameMaster.Instance.ChangeColor(1);
+                GameManager.Instance.ChangeColor(1);
             }
             else if (col.gameObject.tag == ColorJumperConstants.DEATH_TRIGGER)
             {
-                GameMaster.Instance.ApplyPlayerDeath();
+                GameManager.Instance.ApplyPlayerDeath();
                 splitPowerUp.Count = 0;
             }
             else if (col.gameObject.tag == ColorJumperConstants.FINISH)
             {
-                GameMaster.Instance.Finish();
+                GameManager.Instance.Finish();
             }
             else if (col.gameObject.tag == ColorJumperConstants.MOVING_PLATFORM)
             {
@@ -196,7 +206,11 @@ namespace Assets.Scripts
             }
             else if (col.gameObject.tag == ColorJumperConstants.SPLIT_POWER_UP)
             {
-                GameMaster.Instance.TakePowerUp(col.gameObject, splitPowerUp);
+                GameManager.Instance.TakePowerUp(col.gameObject, splitPowerUp);
+            }
+            else if (col.name == ColorJumperConstants.TUT_GOAL_COLLIDER)
+            {
+                FindObjectOfType<TutorialScript>().tutorialGoalColliderHit = true;
             }
         }
 

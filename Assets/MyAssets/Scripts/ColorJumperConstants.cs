@@ -24,6 +24,9 @@ namespace Assets.Scripts
 
         public const string SPLIT_POWER_UP = "SplitPowerUp";
 
+        // Tutorial
+        public const string TUT_GOAL_COLLIDER = "TutorialGoalCollider";
+
         // UI
         public const string COLORED_LABEL = "ColoredLabel";
         public const string LEVEL_LABEL = "LevelLabel";
