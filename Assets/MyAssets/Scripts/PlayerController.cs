@@ -204,9 +204,14 @@ namespace Assets.Scripts
             {
                 transform.SetParent(col.transform);
             }
-            else if (col.gameObject.tag == ColorJumperConstants.SPLIT_POWER_UP)
+            else if (col.gameObject.CompareTag(ColorJumperConstants.POWER_UP))
             {
-                GameManager.Instance.TakePowerUp(col.gameObject, splitPowerUp);
+                IPowerUp powerUp = GameManager.Instance.TakePowerUp(col.gameObject);
+
+                if (powerUp is SplitPowerUp)
+                {
+                    splitPowerUp = powerUp as SplitPowerUp;
+                }
             }
             else if (col.name == ColorJumperConstants.TUT_GOAL_COLLIDER)
             {

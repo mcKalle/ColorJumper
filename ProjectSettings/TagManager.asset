@@ -17,7 +17,7 @@ TagManager:
   - ColorChangerBlue
   - LevelLabel
   - MovingPlatform
-  - SplitPowerUp
+  - PowerUp
   layers:
   - Default
   - TransparentFX

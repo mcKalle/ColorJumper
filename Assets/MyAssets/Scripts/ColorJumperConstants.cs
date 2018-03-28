@@ -22,7 +22,7 @@ namespace Assets.Scripts
 
         public const string MOVING_PLATFORM = "MovingPlatform";
 
-        public const string SPLIT_POWER_UP = "SplitPowerUp";
+        public const string POWER_UP = "PowerUp";
 
         // Tutorial
         public const string TUT_GOAL_COLLIDER = "TutorialGoalCollider";
