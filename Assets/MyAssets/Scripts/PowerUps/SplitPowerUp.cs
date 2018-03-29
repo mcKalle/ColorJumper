@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.MyAssets.Scripts.PowerUps
 {
     [Serializable]
-    public class SplitPowerUp : IPowerUp
+    public class SplitPowerUp : MonoBehaviour, IPowerUp
     {
         public GameObject InspectorPrefab;
 
