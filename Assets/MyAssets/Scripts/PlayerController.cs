@@ -217,6 +217,12 @@ namespace Assets.Scripts
             {
                 FindObjectOfType<TutorialScript>().tutorialGoalColliderHit = true;
             }
+
+            else if (col.gameObject.CompareTag(ColorJumperConstants.ENEMY))
+            {
+                GameManager.Instance.ApplyPlayerDeath();
+                splitPowerUp.Count = 0;
+            }
         }
 
         private void OnTriggerExit2D(Collider2D col)

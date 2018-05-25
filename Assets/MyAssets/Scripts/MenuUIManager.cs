@@ -13,17 +13,43 @@ public class MenuUIManager : MonoBehaviour
     public GameObject ScoresScreen;
     public GameObject OptionsScreens;
 
-    private GameObject activeScreen;
+    [Header("Sounds")]
+    public AudioSource MenuAudioSource;
+    public AudioClip ButtonHoverSound;
+
+    [Header("UI Animation")]
+    public Transform fadeLeftAnimationOrigin;
+    public Transform fadeRightAnimationOrigin;
+    public Transform centerScreenTransform;
+    public float smoothTime = 0.1f;
+    public float fadeVelocity = 5f;
+
+    bool playFadeOutAnimation;
+    bool playFadeInAnimation;
+
+    Vector3 destinationFadeOutPosition;
+    Transform screenToFadeOut;
+
+    Vector3 destinationFadeInPosition;
+    Transform screenToFadeIn;
+
+    Vector3 velocity = Vector3.zero;
+
+    GameObject activeScreen;
 
     // Use this for initialization
     void Start()
     {
-        activeScreen = StartScreen;
-
         StartScreen.SetActive(true);
-        PlayScreen.SetActive(false);
-        ScoresScreen.SetActive(false);
-        OptionsScreens.SetActive(false);
+        PlayScreen.SetActive(true);
+        ScoresScreen.SetActive(true);
+        OptionsScreens.SetActive(true);
+
+        PlayScreen.transform.SetPositionAndRotation(fadeRightAnimationOrigin.position, fadeRightAnimationOrigin.rotation);
+
+        ScoresScreen.transform.SetPositionAndRotation(fadeRightAnimationOrigin.position, fadeRightAnimationOrigin.rotation);
+
+        OptionsScreens.transform.SetPositionAndRotation(fadeRightAnimationOrigin.position, fadeRightAnimationOrigin.rotation);
     }
 
 
@@ -32,13 +58,16 @@ public class MenuUIManager : MonoBehaviour
         switch (title)
         {
             case "Start":
-                activeScreen.SetActive(false);
-                StartScreen.SetActive(true);
+                FadeOutMenuScreen(activeScreen, fadeRightAnimationOrigin);
+                FadeInMenuScreen(StartScreen, fadeLeftAnimationOrigin);
+
                 activeScreen = StartScreen;
+
                 break;
             case "Play":
-                activeScreen.SetActive(false);
-                PlayScreen.SetActive(true);
+                FadeOutMenuScreen(StartScreen, fadeLeftAnimationOrigin);
+                FadeInMenuScreen(PlayScreen, fadeRightAnimationOrigin);
+
                 activeScreen = PlayScreen;
 
                 // TODO 
@@ -46,8 +75,9 @@ public class MenuUIManager : MonoBehaviour
 
                 break;
             case "Scores":
-                activeScreen.SetActive(false);
-                ScoresScreen.SetActive(true);
+                FadeOutMenuScreen(StartScreen, fadeLeftAnimationOrigin);
+                FadeInMenuScreen(ScoresScreen, fadeRightAnimationOrigin);
+
                 activeScreen = ScoresScreen;
 
                 // TODO 
@@ -55,18 +85,55 @@ public class MenuUIManager : MonoBehaviour
 
                 break;
             case "Options":
-                activeScreen.SetActive(false);
-                OptionsScreens.SetActive(true);
+                FadeOutMenuScreen(StartScreen, fadeLeftAnimationOrigin);
+                FadeInMenuScreen(OptionsScreens, fadeRightAnimationOrigin);
+
                 activeScreen = OptionsScreens;
 
                 // TODO 
                 // read settings
-
                 break;
             default:
                 // Exit
                 Application.Quit();
                 break;
+        }
+    }
+
+    private void FadeOutMenuScreen(GameObject screen, Transform sideToFadeOut)
+    {
+        screenToFadeOut = screen.transform;
+        destinationFadeOutPosition = sideToFadeOut.position;
+        playFadeOutAnimation = true;
+    }
+
+    private void FadeInMenuScreen(GameObject screen, Transform sideToFadeOut)
+    {
+        screenToFadeIn = screen.transform;
+        destinationFadeInPosition = centerScreenTransform.position;
+        playFadeInAnimation = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (playFadeOutAnimation)
+        {
+            screenToFadeOut.position = Vector3.SmoothDamp(screenToFadeOut.position, destinationFadeOutPosition, ref velocity, smoothTime, fadeVelocity);
+
+            if (screenToFadeOut.position == destinationFadeOutPosition)
+            {
+                playFadeOutAnimation = false;
+            }
+        }
+
+        if (playFadeInAnimation)
+        {
+            screenToFadeIn.position = Vector3.SmoothDamp(screenToFadeIn.position, destinationFadeInPosition, ref velocity, smoothTime, fadeVelocity);
+
+            if (screenToFadeIn.position == destinationFadeInPosition)
+            {
+                playFadeInAnimation = false;
+            }
         }
     }
 

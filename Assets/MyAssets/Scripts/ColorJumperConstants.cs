@@ -17,6 +17,7 @@ namespace Assets.Scripts
         public const string FINISH = "Finish";
 
         public const string PLAYER = "Player";
+        public const string ENEMY = "Enemy";
 
         public const string OBSTACLE = "Obstacle";
 

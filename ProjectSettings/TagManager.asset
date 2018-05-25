@@ -18,6 +18,7 @@ TagManager:
   - LevelLabel
   - MovingPlatform
   - PowerUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
