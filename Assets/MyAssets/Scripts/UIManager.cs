@@ -9,9 +9,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
-    public static UIManager Instance;
-
     public TextMeshProUGUI ChangeCountLabel;
     public TextMeshProUGUI SplitPowerUpCountLabel;
     TextMeshProUGUI _levelLabel;
@@ -19,16 +16,16 @@ public class UIManager : MonoBehaviour
     List<GameObject> _coloredLabelsGameObjects;
     List<Text> _coloredLabels;
 
-
-
     [Header("Color Change Count Image")]
     public Sprite ColorChanges;
     public Image ColorChangeCountImage;
 
+
+    [Header("Death Menu")]
+    public GameObject deathPanel;
+
     void Start()
     {
-        Instance = this;
-
         _coloredLabels = new List<Text>();
 
         _coloredLabelsGameObjects = GameObject.FindGameObjectsWithTag(ColorJumperConstants.COLORED_LABEL).ToList();

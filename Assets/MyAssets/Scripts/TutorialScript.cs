@@ -36,9 +36,12 @@ namespace Assets.MyAssets.Scripts
         float fadeInDuration = 0.8f;
         float arrowTargetOpacity = .56f;
 
+        GameManager gameManager;
+
         private void Awake()
         {
             playerController = playerObject.GetComponent<PlayerController>();
+            gameManager = FindObjectOfType<GameManager>();
 
             // read from settings if tutorial was already finished
             tutorialFinished = PlayerPrefs.GetInt("TutorialDone") == 1;
@@ -104,7 +107,7 @@ namespace Assets.MyAssets.Scripts
                         }
                         break;
                     case 2:
-                        if (GameManager.Instance.IsColor1)
+                        if (gameManager.IsColor1)
                         {
                             // color was changed
                             colorChangerArrow.SetActive(false);

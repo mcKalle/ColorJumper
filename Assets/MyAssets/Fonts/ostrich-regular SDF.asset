@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: ostrich-regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1574732834
   material: {fileID: 21202876563418202}
-  materialHashCode: 0
+  materialHashCode: 1824051605
   fontAssetType: 1
   m_fontInfo:
     Name: Ostrich Sans
     PointSize: 97
-    Scale: 0
+    Scale: 1
     CharacterCount: 96
     LineHeight: 97
     Baseline: 0
     Ascender: 72.75
-    CapHeight: 0
+    CapHeight: 65.375
     Descender: -24.25
     CenterLine: 0
     SuperscriptOffset: 72.75
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 4.85
     strikethrough: 17.636364
     strikethroughThickness: 4.85
-    TabWidth: 0
+    TabWidth: 203.75
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 517
-    width: 0
-    height: 0
+    width: 20.375
+    height: 97
     xOffset: 0
-    yOffset: 0
+    yOffset: 72.75
     xAdvance: 20.375
     scale: 1
   - id: 33
@@ -961,6 +961,7 @@ Material:
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -1015,9 +1016,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -1057,6 +1058,8 @@ Texture2D:
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
   serializedVersion: 2
   m_Width: 512
   m_Height: 512
@@ -1068,10 +1071,13 @@ Texture2D:
   m_ImageCount: 1
   m_TextureDimension: 2
   m_TextureSettings:
+    serializedVersion: 2
     m_FilterMode: 1
     m_Aniso: 1
     m_MipBias: 0
-    m_WrapMode: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
   m_LightmapFormat: 0
   m_ColorSpace: 0
   image data: 262144

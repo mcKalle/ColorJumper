@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour
 
     public Camera MainCamera;
 
-    public static GameManager Instance;
-
     [Header("Background Colors")]
     public Color Color1;
     public Color Color2;
@@ -46,11 +44,14 @@ public class GameManager : MonoBehaviour
 
     int changeCount;
 
+    UIManager uiManager;
+    CameraFollow cameraFollow;
+
+    Vector3 initialCameraPosition;
+
     // Use this for initialization
     void Start()
     {
-        Instance = this;
-
         changeCount = 0;
 
         player = GameObject.FindGameObjectWithTag(ColorJumperConstants.PLAYER);
@@ -59,20 +60,10 @@ public class GameManager : MonoBehaviour
         // save all powerUps in the scene
         powerUps = GameObject.FindGameObjectsWithTag(ColorJumperConstants.POWER_UP).ToList();
 
-        //foreach (var item in allPowerUps)
-        //{
-        //    IPowerUp powerUp = item.GetComponent<IPowerUp>();
+        uiManager = FindObjectOfType<UIManager>();
+        cameraFollow = FindObjectOfType<CameraFollow>();
 
-        //    //// set all power ups to active
-        //    //powerUp.Placed = true;
-        //    //// save parent
-        //    //powerUp.Parent = item.transform.parent;
-        //    //// save position
-        //    //powerUp.XPos = item.transform.position.x;
-        //    //powerUp.YPos = item.transform.position.y;
-
-        //    powerUps.Add(powerUp);
-        //}
+        initialCameraPosition = Camera.main.transform.position;
 
         Respawn();
     }
@@ -81,29 +72,38 @@ public class GameManager : MonoBehaviour
 
     public void ApplyPlayerDeath()
     {
-        MainCamera.backgroundColor = Color.black;
-
         playerRenderer.enabled = false;
 
-        Respawn();
+        uiManager.deathPanel.SetActive(true);
+
+        cameraFollow.enabled = false;
     }
 
-    private void Respawn()
+    public void Respawn()
     {
+        // hide death menu
+        uiManager.deathPanel.SetActive(false);
+
         // reset position
         player.transform.position = LevelEntryPoint.position;
         // reset size
         player.transform.localScale = new Vector3(1, 1, 1);
+
+        Camera.main.transform.SetPositionAndRotation(new Vector3(initialCameraPosition.x, initialCameraPosition.y + 1, initialCameraPosition.z), 
+            Camera.main.transform.rotation);
+
+
+        cameraFollow.enabled = true;
 
         RespawnPowerUps();
 
         ChangeColor(2);
         changeCount = 0;
 
-        if (UIManager.Instance != null)
+        if (uiManager != null)
         {
-            UIManager.Instance.UpdateChangeCount(changeCount);
-            UIManager.Instance.UpdateSplitPowerUpCount(0);
+            uiManager.UpdateChangeCount(changeCount);
+            uiManager.UpdateSplitPowerUpCount(0);
         }
 
         playerRenderer.enabled = true;
@@ -133,6 +133,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level " + (level + 1));
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
     #endregion
 
     #region ColorChanging
@@ -148,9 +153,9 @@ public class GameManager : MonoBehaviour
                 playerRenderer.material = Color2Material;
                 Color1Obstacles.SetActive(false);
                 Color2Obstacles.SetActive(true);
-                if (UIManager.Instance != null)
+                if (uiManager != null)
                 {
-                    UIManager.Instance.ApplyColorChange(LabelColor2, colorMode);
+                    uiManager.ApplyColorChange(LabelColor2, colorMode);
                 }
                 break;
             case 2:
@@ -158,9 +163,9 @@ public class GameManager : MonoBehaviour
                 playerRenderer.material = Color1Material;
                 Color1Obstacles.SetActive(true);
                 Color2Obstacles.SetActive(false);
-                if (UIManager.Instance != null)
+                if (uiManager != null)
                 {
-                    UIManager.Instance.ApplyColorChange(LabelColor1, colorMode);
+                    uiManager.ApplyColorChange(LabelColor1, colorMode);
                 }
                 break;
             default:
@@ -170,9 +175,9 @@ public class GameManager : MonoBehaviour
         changeCount++;
 
         // UI handling
-        if (UIManager.Instance != null)
+        if (uiManager != null)
         {
-            UIManager.Instance.UpdateChangeCount(changeCount);
+            uiManager.UpdateChangeCount(changeCount);
         }
 
     }
@@ -190,7 +195,7 @@ public class GameManager : MonoBehaviour
             powerUp.Count++;
 
             // do ui stuff
-            UIManager.Instance.UpdateSplitPowerUpCount(powerUp.Count);
+            uiManager.UpdateSplitPowerUpCount(powerUp.Count);
         }
 
         // let it disappear

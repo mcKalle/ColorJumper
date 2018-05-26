@@ -64,6 +64,9 @@ namespace Assets.Scripts
 
         public float ShrinkAmount = 0.8f;
 
+        GameManager gameManager;
+        UIManager uiManager;
+
         void Start()
         {
             controller = GetComponent<Controller2D>();
@@ -73,6 +76,9 @@ namespace Assets.Scripts
             minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
             splitPowerUp = new SplitPowerUp();
+
+            gameManager = FindObjectOfType<GameManager>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         void Update()
@@ -177,7 +183,7 @@ namespace Assets.Scripts
 
             splitPowerUp.Count = splitPowerUp.Count - 1;
 
-            UIManager.Instance.UpdateSplitPowerUpCount(splitPowerUp.Count);
+            uiManager.UpdateSplitPowerUpCount(splitPowerUp.Count);
         }
 
 
@@ -185,20 +191,20 @@ namespace Assets.Scripts
         {
             if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_LIGHT)
             {
-                GameManager.Instance.ChangeColor(2);
+                gameManager.ChangeColor(2);
             }
             else if (col.gameObject.tag == ColorJumperConstants.COLOR_CHANGER_DARK)
             {
-                GameManager.Instance.ChangeColor(1);
+                gameManager.ChangeColor(1);
             }
             else if (col.gameObject.tag == ColorJumperConstants.DEATH_TRIGGER)
             {
-                GameManager.Instance.ApplyPlayerDeath();
+                gameManager.ApplyPlayerDeath();
                 splitPowerUp.Count = 0;
             }
             else if (col.gameObject.tag == ColorJumperConstants.FINISH)
             {
-                GameManager.Instance.Finish();
+                gameManager.Finish();
             }
             else if (col.gameObject.tag == ColorJumperConstants.MOVING_PLATFORM)
             {
@@ -206,7 +212,7 @@ namespace Assets.Scripts
             }
             else if (col.gameObject.CompareTag(ColorJumperConstants.POWER_UP))
             {
-                IPowerUp powerUp = GameManager.Instance.TakePowerUp(col.gameObject);
+                IPowerUp powerUp = gameManager.TakePowerUp(col.gameObject);
 
                 if (powerUp is SplitPowerUp)
                 {
@@ -220,7 +226,7 @@ namespace Assets.Scripts
 
             else if (col.gameObject.CompareTag(ColorJumperConstants.ENEMY))
             {
-                GameManager.Instance.ApplyPlayerDeath();
+                gameManager.ApplyPlayerDeath();
                 splitPowerUp.Count = 0;
             }
         }
