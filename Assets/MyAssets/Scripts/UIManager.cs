@@ -42,22 +42,13 @@ public class UIManager : MonoBehaviour
         UpdateChangeCount(0);
     }
 
-    public void ApplyColorChange(Color color, int colorMode)
+    public void ApplyColorChange(int colorMode)
     {
-        ChangeLabels(color, colorMode);
+        ChangeLabels(colorMode);
     }
 
-    void ChangeLabels(Color color, int colorMode)
+    void ChangeLabels(int colorMode)
     {
-        //float r = color.r, g = color.g, b = color.b, a = color.a;
-
-        //// switch colors for labels
-        //foreach (Text coloredLabel in _coloredLabels)
-        //{
-        //    coloredLabel.color= new Color(r, g, b, a);
-        //    coloredLabel.gameObject.SetActive(true);
-        //}
-
         // set the roation depending on the colorMode (1=dark color, 2=light color) 
         // --> therefore the Y roation is either 0 or 180
         ColorChangeCountImage.transform.localEulerAngles = new Vector3(colorMode == 2 ? 0 : 180, 0, 0);

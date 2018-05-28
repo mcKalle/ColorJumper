@@ -10,37 +10,58 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-
     public Camera MainCamera;
 
-    [Header("Background Colors")]
-    public Color Color1;
-    public Color Color2;
+    [Header("Light Color")]
+    public Color LightBackgroundColor;
+    public Color LightColor2;
+    public Color LightPlattformColor;
+    public Color LightColor4;
+    public Color LightPlayerColor;
+    [Space]
+    public Color LightPowerUpColor;
+    [Space]
+    public Material LightPlatformMaterial;
+    [Space]
+    public Material LightPlayerMaterial;
+
+    [Space]
+    [Space]
+
+    [Header("Dark Color")]
+    public Color DarkBackgroundColor;
+    public Color DarkColor2;
+    public Color DarkPlattformColor;
+    public Color DarkColor4;
+    public Color DarkPlayerColor;
+    [Space]
+    public Color DarkPowerUpColor;
+    [Space]
+    public Material DarkPlatformMaterial;
+    [Space]
+    public Material DarkPlayerMaterial;
+
+    [Space]
+    [Space]
 
     [Header("Obstacle Containers")]
     public GameObject Color1Obstacles;
     public GameObject Color2Obstacles;
 
-    [Header("Player Materials")]
-    public Material Color1Material;
-    public Material Color2Material;
-
-    [Header("Label Colors")]
-    public Color LabelColor1;
-    public Color LabelColor2;
-
-    [HideInInspector]
-    public List<GameObject> powerUps;
-
+    [Space]
+    [Space]
 
     [Header("Start Point")]
     public Transform LevelEntryPoint;
+
+    [HideInInspector]
+    public List<GameObject> powerUps;
 
     GameObject player;
     Renderer playerRenderer;
 
     [HideInInspector]
-    public bool IsColor1 = true;
+    public bool IsLightColor = true;
 
     int changeCount;
 
@@ -54,6 +75,8 @@ public class GameManager : MonoBehaviour
     {
         changeCount = 0;
 
+        InitColors();
+
         player = GameObject.FindGameObjectWithTag(ColorJumperConstants.PLAYER);
         playerRenderer = player.GetComponent<Renderer>();
 
@@ -66,6 +89,15 @@ public class GameManager : MonoBehaviour
         initialCameraPosition = Camera.main.transform.position;
 
         Respawn();
+    }
+
+    private void InitColors()
+    {
+        LightPlayerMaterial.color = LightPlayerColor;
+        LightPlatformMaterial.color = LightPlattformColor;
+
+        DarkPlayerMaterial.color = DarkPlayerColor;
+        DarkPlatformMaterial.color = DarkPlattformColor;
     }
 
     #region SpawnDeathFinish
@@ -89,7 +121,7 @@ public class GameManager : MonoBehaviour
         // reset size
         player.transform.localScale = new Vector3(1, 1, 1);
 
-        Camera.main.transform.SetPositionAndRotation(new Vector3(initialCameraPosition.x, initialCameraPosition.y + 1, initialCameraPosition.z), 
+        Camera.main.transform.SetPositionAndRotation(new Vector3(initialCameraPosition.x, initialCameraPosition.y + 1, initialCameraPosition.z),
             Camera.main.transform.rotation);
 
 
@@ -144,28 +176,28 @@ public class GameManager : MonoBehaviour
 
     public void ChangeColor(int colorMode)
     {
-        IsColor1 = !IsColor1;
+        IsLightColor = !IsLightColor;
 
         switch (colorMode)
         {
             case 1:
-                MainCamera.backgroundColor = Color2;
-                playerRenderer.material = Color2Material;
+                MainCamera.backgroundColor = DarkBackgroundColor;
+                playerRenderer.material = DarkPlayerMaterial;
                 Color1Obstacles.SetActive(false);
                 Color2Obstacles.SetActive(true);
                 if (uiManager != null)
                 {
-                    uiManager.ApplyColorChange(LabelColor2, colorMode);
+                    uiManager.ApplyColorChange(colorMode);
                 }
                 break;
             case 2:
-                MainCamera.backgroundColor = Color1;
-                playerRenderer.material = Color1Material;
+                MainCamera.backgroundColor = LightBackgroundColor;
+                playerRenderer.material = LightPlayerMaterial;
                 Color1Obstacles.SetActive(true);
                 Color2Obstacles.SetActive(false);
                 if (uiManager != null)
                 {
-                    uiManager.ApplyColorChange(LabelColor1, colorMode);
+                    uiManager.ApplyColorChange(colorMode);
                 }
                 break;
             default:

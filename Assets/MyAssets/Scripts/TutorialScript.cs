@@ -107,7 +107,7 @@ namespace Assets.MyAssets.Scripts
                         }
                         break;
                     case 2:
-                        if (gameManager.IsColor1)
+                        if (gameManager.IsLightColor)
                         {
                             // color was changed
                             colorChangerArrow.SetActive(false);
