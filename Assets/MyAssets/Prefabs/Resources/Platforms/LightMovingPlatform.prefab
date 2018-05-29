@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4619069612654302}
   - component: {fileID: 114371776705316092}
   m_Layer: 0
-  m_Name: MovingPlatform
+  m_Name: LightMovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853558280277070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.58, y: -1.07, z: 0}
+  m_LocalPosition: {x: 3.0620835, y: -2.8441215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4393137081143038}
@@ -218,7 +218,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 83d1abd6998a83e4fb60e02a67d953ba, type: 2}
+  - {fileID: 2100000, guid: 5d8298469e8961c479d048df7e9ea647, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
