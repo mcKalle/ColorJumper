@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1637877997123394}
+  m_IsPrefabParent: 1
+--- !u!1 &1637877997123394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4899977448153124}
+  - component: {fileID: 114811677618592074}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4899977448153124
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637877997123394}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114811677618592074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637877997123394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b30ac40794cfde4f81a158b5d0f1c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightBackgroundColor: {r: 1, g: 1, b: 0.99607843, a: 1}
+  LightColor2: {r: 0.9647059, g: 0.95686275, b: 0.9490196, a: 1}
+  LightPlattformColor: {r: 0.76862746, g: 0.7529412, b: 0.7372549, a: 1}
+  LightColor4: {r: 0.6039216, g: 0.5803922, b: 0.5647059, a: 1}
+  LightPlayerColor: {r: 0.45490196, g: 0.42352942, b: 0.4, a: 1}
+  LightPowerUpColor: {r: 0, g: 0, b: 0, a: 0}
+  LightPlatformMaterial: {fileID: 2100000, guid: 5d8298469e8961c479d048df7e9ea647,
+    type: 2}
+  LightPlayerMaterial: {fileID: 2100000, guid: 013d18b061597604684ce8941febb733, type: 2}
+  LightColorChangerColors:
+  - {r: 0.23529413, g: 0.24705884, b: 0.26666668, a: 0}
+  - {r: 0.32941177, g: 0.3372549, b: 0.35686275, a: 0}
+  - {r: 0.5647059, g: 0.5686275, b: 0.57254905, a: 0}
+  - {r: 0.82745105, g: 0.8313726, b: 0.8313726, a: 0}
+  LightColorChangerMaterials:
+  - {fileID: 2100000, guid: 91c53b8938f8e404cbc2bb38530cb7c3, type: 2}
+  - {fileID: 2100000, guid: 91c35f710c6500546b818f8c964bcca3, type: 2}
+  - {fileID: 2100000, guid: a5fb51d2c7553934b824c1ca4187924e, type: 2}
+  - {fileID: 2100000, guid: 15f30a39e8370954caea1af5e15376f3, type: 2}
+  DarkBackgroundColor: {r: 0.47058824, g: 0.47843137, b: 0.49019608, a: 1}
+  DarkColor2: {r: 0.6, g: 0.6039216, b: 0.60784316, a: 1}
+  DarkPlattformColor: {r: 0.2627451, g: 0.27450982, b: 0.29803923, a: 1}
+  DarkColor4: {r: 0.3647059, g: 0.37254903, b: 0.39215687, a: 1}
+  DarkPlayerColor: {r: 0.84705883, g: 0.8509804, b: 0.8509804, a: 1}
+  DarkPowerUpColor: {r: 1, g: 1, b: 1, a: 0}
+  DarkPlatformMaterial: {fileID: 2100000, guid: 83d1abd6998a83e4fb60e02a67d953ba,
+    type: 2}
+  DarkPlayerMaterial: {fileID: 2100000, guid: 8063dfcfd1e6fd7489674608e93ff80f, type: 2}
+  DarkColorChangerColors:
+  - {r: 0.9647059, g: 0.95686275, b: 0.9490196, a: 1}
+  - {r: 0.76862746, g: 0.7529412, b: 0.7372549, a: 1}
+  - {r: 0.6039216, g: 0.5803922, b: 0.5647059, a: 1}
+  - {r: 0.45490196, g: 0.42352942, b: 0.4, a: 1}
+  DarkColorChangerMaterials:
+  - {fileID: 2100000, guid: a9296eb90d760ca4bb27a34a269a4349, type: 2}
+  - {fileID: 2100000, guid: 8455b23e7e82a6f47b7e1fb41f6274d6, type: 2}
+  - {fileID: 2100000, guid: b496c2df6acba5d4c96f31e65655a1b2, type: 2}
+  - {fileID: 2100000, guid: 1b452be59adc521499d9c6e2936c5783, type: 2}
+  LightObstacles: {fileID: 0}
+  DarkObstacles: {fileID: 0}
+  LevelEntryPoint: {fileID: 0}
+  powerUps:
+  - {fileID: 0}
+  IsLightColor: 1
