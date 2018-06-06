@@ -157,6 +157,281 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightBackgroundColor.r
+      value: 0.80784315
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightBackgroundColor.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightBackgroundColor.b
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlayerColor.r
+      value: 0.4627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlayerColor.g
+      value: 0.37254903
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlayerColor.b
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor4.r
+      value: 0.40392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor4.g
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor4.b
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor2.r
+      value: 0.80784315
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor2.g
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColor2.b
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlattformColor.r
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlattformColor.g
+      value: 0.45490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightPlattformColor.b
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[0].r
+      value: 0.05882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[0].g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[0].b
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[1].r
+      value: 0.1882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[1].g
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[1].b
+      value: 0.38431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[2].r
+      value: 0.42745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[2].g
+      value: 0.63529414
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[2].b
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[3].r
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[3].g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[3].b
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: LightColorChangerColors.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkBackgroundColor.r
+      value: 0.1882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkBackgroundColor.g
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkBackgroundColor.b
+      value: 0.38431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColor2.r
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColor2.g
+      value: 0.45490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColor2.b
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlattformColor.r
+      value: 0.49803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlattformColor.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlattformColor.b
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlayerColor.r
+      value: 0.1764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlayerColor.g
+      value: 0.2627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkPlayerColor.b
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[0].r
+      value: 0.80784315
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[0].g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[0].b
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[1].r
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[1].g
+      value: 0.45490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[1].b
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[2].r
+      value: 0.1882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[2].g
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[2].b
+      value: 0.38431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[3].r
+      value: 0.05882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[3].g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774887070750720, guid: d4935c8619509cf4aae1024ea859c988,
+        type: 2}
+      propertyPath: DarkColorChangerColors.Array.data[3].b
+      value: 0.2509804
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4935c8619509cf4aae1024ea859c988, type: 2}
   m_IsPrefabParent: 0

@@ -1,5 +1,7 @@
 ﻿using Assets.MyAssets.Scripts;
 using Assets.MyAssets.Scripts.PowerUps;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -60,7 +62,8 @@ namespace Assets.Scripts
         public Controller2D controller;
 
         [System.NonSerialized]
-        public SplitPowerUp splitPowerUp;
+        public List<SplitPowerUp> splitPowerUps;
+        bool splitPowerUpCanBeUsed;
 
         public float ShrinkAmount = 0.8f;
 
@@ -75,7 +78,7 @@ namespace Assets.Scripts
             maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
             minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
-            splitPowerUp = new SplitPowerUp();
+            splitPowerUps = new List<SplitPowerUp>();
 
             gameManager = FindObjectOfType<GameManager>();
             uiManager = FindObjectOfType<UIManager>();
@@ -110,7 +113,7 @@ namespace Assets.Scripts
                         // the player can use the split power up now
 
                         // trigger it if the user hits the power-up key (enter key)
-                        splitPowerUp.CanBeUsed = true;
+                        splitPowerUpCanBeUsed = true;
                     }
 
                 }
@@ -138,7 +141,7 @@ namespace Assets.Scripts
                 velocity.y = 0;
                 jumpCount = 0;
 
-                splitPowerUp.CanBeUsed = false;
+                splitPowerUpCanBeUsed = false;
 
                 if (!controlsEnabled)
                 {
@@ -153,7 +156,7 @@ namespace Assets.Scripts
 
             if (Input.GetKeyDown(KeyCode.Return) && controlsEnabled)
             {
-                if (splitPowerUp.Count > 0 && splitPowerUp.CanBeUsed)
+                if (splitPowerUps.Count > 0 && splitPowerUpCanBeUsed)
                 {
                     TriggerSplitPowerUp();
                 }
@@ -177,13 +180,14 @@ namespace Assets.Scripts
             oldPlayer.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             // disable controls
             oldPlayer.GetComponent<PlayerController>().controlsEnabled = false;
+            oldPlayer.tag = "Untagged";
 
             // apply the extra jump
             velocity.y = maxJumpVelocity;
 
-            splitPowerUp.Count = splitPowerUp.Count - 1;
+            splitPowerUps.Remove(splitPowerUps.Last());
 
-            uiManager.UpdateSplitPowerUpCount(splitPowerUp.Count);
+            uiManager.UpdateSplitPowerUpCount(splitPowerUps.Count);
         }
 
 
@@ -200,7 +204,7 @@ namespace Assets.Scripts
             else if (col.gameObject.tag == ColorJumperConstants.DEATH_TRIGGER)
             {
                 gameManager.ApplyPlayerDeath();
-                splitPowerUp.Count = 0;
+                splitPowerUps.Clear();
             }
             else if (col.gameObject.tag == ColorJumperConstants.FINISH)
             {
@@ -216,7 +220,9 @@ namespace Assets.Scripts
 
                 if (powerUp is SplitPowerUp)
                 {
-                    splitPowerUp = powerUp as SplitPowerUp;
+                    splitPowerUps.Add(powerUp as SplitPowerUp);
+                    // do ui stuff
+                    uiManager.UpdateSplitPowerUpCount(splitPowerUps.Count);
                 }
             }
             else if (col.name == ColorJumperConstants.TUT_GOAL_COLLIDER)
@@ -227,7 +233,7 @@ namespace Assets.Scripts
             else if (col.gameObject.CompareTag(ColorJumperConstants.ENEMY))
             {
                 gameManager.ApplyPlayerDeath();
-                splitPowerUp.Count = 0;
+                splitPowerUps.Clear();
             }
         }
 

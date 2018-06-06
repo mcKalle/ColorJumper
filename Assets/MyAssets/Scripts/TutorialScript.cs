@@ -34,7 +34,7 @@ namespace Assets.MyAssets.Scripts
         public GameObject tutorialColorChanger;
 
         float fadeInDuration = 0.8f;
-        float arrowTargetOpacity = .56f;
+        float arrowTargetOpacity = .88f;
 
         GameManager gameManager;
 
@@ -52,12 +52,15 @@ namespace Assets.MyAssets.Scripts
                 tutorialPanel.SetActive(true);
 
                 // set opacity of hint sprites to 0 (to later fade them in)
-                var spriteRenderer = tutorialColorChanger.GetComponent<SpriteRenderer>();
-                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
-                spriteRenderer = colorChangerArrow.GetComponent<SpriteRenderer>();
+                //var spriteRenderer = tutorialColorChanger.GetComponent<SpriteRenderer>();
+                //spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
+
+                var spriteRenderer = colorChangerArrow.GetComponent<SpriteRenderer>();
                 spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
                 spriteRenderer = powerUpArrow.GetComponent<SpriteRenderer>();
                 spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
+
+                tutorialColorChanger.SetActive(false);
 
                 foreach (var arrowObject in usePowerUpArrows)
                 {
@@ -95,7 +98,7 @@ namespace Assets.MyAssets.Scripts
                         {
                             // player managed double jump 
 
-                            FadeInGameObject(tutorialColorChanger, fadeInDuration, 1f);
+                            tutorialColorChanger.SetActive(true);
                             FadeInGameObject(colorChangerArrow, fadeInDuration, arrowTargetOpacity);
 
                             tutorialText.text = "Use A and D to move.\nJump into the Color Changer to switch to a different color world.";
@@ -119,7 +122,7 @@ namespace Assets.MyAssets.Scripts
                         }
                         break;
                     case 3:
-                        if (playerController.splitPowerUp.Count > 0)
+                        if (playerController.splitPowerUps.Count > 0)
                         {
                             // player picked up the power up
                             powerUpArrow.SetActive(false);

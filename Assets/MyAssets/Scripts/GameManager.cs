@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
         initialCameraPosition = Camera.main.transform.position;
 
-        Respawn();
+        Spawn();
     }
 
     private void InitColors()
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         cameraFollow.enabled = false;
     }
 
-    public void Respawn()
+    public void Spawn()
     {
         // hide death menu
         if (uiManager.deathPanel != null)
@@ -133,13 +133,12 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.SetPositionAndRotation(new Vector3(initialCameraPosition.x, initialCameraPosition.y + 1, initialCameraPosition.z),
             Camera.main.transform.rotation);
 
-
         cameraFollow.enabled = true;
-
-        RespawnPowerUps();
 
         ChangeColor(2);
         changeCount = 0;
+
+        RespawnPowerUps();
 
         if (uiManager != null)
         {
@@ -149,7 +148,12 @@ public class GameManager : MonoBehaviour
 
         playerRenderer.enabled = true;
 
-        player.GetComponent<BoxCollider2D>().transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 5), player.transform.rotation);
+        player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + 5), player.transform.rotation);
+    }
+
+    private void Respawn()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void RespawnPowerUps()
@@ -263,19 +267,12 @@ public class GameManager : MonoBehaviour
 
     public IPowerUp TakePowerUp(GameObject gameObject)
     {
-        IPowerUp powerUp = gameObject.GetComponent<IPowerUp>();
-
-        if (powerUp is SplitPowerUp)
-        {
-            powerUp.Count++;
-
-            // do ui stuff
-            uiManager.UpdateSplitPowerUpCount(powerUp.Count);
-        }
-
         // let it disappear
         gameObject.SetActive(false);
         // TODO: maybe with particles
+
+        IPowerUp powerUp = gameObject.GetComponent<IPowerUp>();
+        powerUp.Count++;
 
         return powerUp;
     }
